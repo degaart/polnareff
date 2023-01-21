@@ -1,5 +1,5 @@
 [build]
-rustflags = ["-Clink-args=-Map=target/i586-polnareff-none/debug/polnareff.map"]
+rustflags = ["-Clink-args=-Tlinker.ld -Map=target/i586-polnareff-none/debug/polnareff.map"]
 target = "i586-polnareff-none.json"
 
 [unstable]
