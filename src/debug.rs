@@ -4,7 +4,8 @@ fn write_char(ch: u8) {
     unsafe {
         asm! {
             "out 0xE9, al",
-            in("al") ch
+            in("al") ch,
+            options(nomem,preserves_flags,nostack)
         }
     }
 }

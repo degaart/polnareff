@@ -6,7 +6,6 @@ mod debug;
 
 use debug::write_string;
 
-
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
     loop {}
