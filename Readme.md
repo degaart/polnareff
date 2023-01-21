@@ -7,13 +7,13 @@
 # How to build
 
 ```bash
-make
+cargo build
 ```
 
 # How to run
 
 ```
-make run
+cargo run
 ```
 
 It should print `It works!` on stdout
