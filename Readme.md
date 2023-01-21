@@ -16,6 +16,6 @@ make
 make run
 ```
 
-It should print `ABC` on stdout
+It should print `It works!` on stdout
 
 

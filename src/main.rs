@@ -23,23 +23,27 @@ fn panic(_: &core::panic::PanicInfo) -> ! {
     loop {}
 }
 
+fn write_char(ch: u8) {
+    unsafe {
+        asm! {
+            "out 0xE9, al",
+            in("al") ch
+        }
+    }
+}
+
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     /*
      * We need to use the symbol or it will be stripped from the executable
      */
     let _use_multiboot = &MULTIBOOT;
-    unsafe {
-        asm! {
-            "mov al, 'A'",
-            "out 0xE9, al",
-            "mov al, 'B'",
-            "out 0xE9, al",
-            "mov al, 'C'",
-            "out 0xE9, al",
-            out("al") _
-        };
+
+    let message = b"It works!\n";
+    for ch in message.iter() {
+        write_char(*ch);
     }
+
     loop {
     }
 }
