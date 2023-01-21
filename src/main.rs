@@ -32,18 +32,19 @@ fn write_char(ch: u8) {
     }
 }
 
+fn write_string(s: &str) {
+    for ch in s.bytes() {
+        write_char(ch);
+    }
+}
+
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     /*
      * We need to use the symbol or it will be stripped from the executable
      */
     let _use_multiboot = &MULTIBOOT;
-
-    let message = b"It works!\n";
-    for ch in message.iter() {
-        write_char(*ch);
-    }
-
+    write_string("It works!\n");
     loop {
     }
 }
