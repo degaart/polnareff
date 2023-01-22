@@ -1,11 +1,16 @@
 [build]
-rustflags = ["-Clink-args=-Tlinker.ld -Map=target/i586-polnareff-none/debug/polnareff.map"]
+rustflags = [
+    "-Cinline-threshold=0",
+    "-Clto=off",
+    "-Crelocation-model=static",
+    "-Clink-args=-Tlinker.ld -Map=target/i586-polnareff-none/debug/polnareff.map"
+]
 target = "i586-polnareff-none.json"
 
 [unstable]
-build-std-features = ["compiler-builtins-mem"]
+#build-std-features = ["compiler-builtins-mem"]
 build-std = ["core", "compiler_builtins"]
 
 [target.'cfg(target_os = "none")']
-runner = "qemu-system-i386 -debugcon stdio -kernel"
+runner = "qemu-system-i386 -debugcon stdio -no-reboot -kernel"
 

@@ -14,7 +14,7 @@
   "is-builtin": false,
   "max-atomic-width": 32,
   "position-independent-executables": false,
-  "relro-level": "full",
+  "relro-level": "off",
   "executables": true,
   "linker-flavor": "ld.lld",
   "linker": "rust-lld",
