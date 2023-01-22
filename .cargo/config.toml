@@ -12,5 +12,5 @@ target = "i586-polnareff-none.json"
 build-std = ["core", "compiler_builtins"]
 
 [target.'cfg(target_os = "none")']
-runner = "qemu-system-i386 -debugcon stdio -no-reboot -kernel"
+runner = "./run.sh"
 

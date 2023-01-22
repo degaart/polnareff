@@ -32,6 +32,8 @@ _start:
     extern kmain
     call kmain
     cli
+    mov al, 1
+    out 0xF4, al
 
 .halt:
     hlt

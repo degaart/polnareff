@@ -25,16 +25,25 @@ pub fn write_string(s: &str) {
     }
 }
 
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    Writer{}.write_fmt(format_args!("\n*** PANIC ***\n{}\n", _info)).unwrap();
+fn exit_qemu(status: u8) -> ! {
+    unsafe {
+        asm! {
+            "out 0xF4, al",
+            in("al") status
+        }
+    }
     loop {}
 }
 
+#[panic_handler]
+fn panic(_info: &core::panic::PanicInfo) -> ! {
+    Writer{}.write_fmt(format_args!("\n*** PANIC ***\n{}\n", _info)).unwrap();
+    exit_qemu(2);
+}
+
 #[no_mangle]
-pub extern "C" fn kmain() -> ! {
+pub extern "C" fn kmain() {
     Writer{}.write_fmt(format_args!("{}{}{}\n", "---", "It works!", "---")).unwrap();
-    panic!("Kernel end");
 }
 
 
