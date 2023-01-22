@@ -4,10 +4,9 @@
 mod multiboot;
 mod debug;
 
-use debug::write_string;
-
 #[panic_handler]
-fn panic(_: &core::panic::PanicInfo) -> ! {
+fn panic(info: &core::panic::PanicInfo) -> ! {
+    println!("{}", info);
     loop {}
 }
 
@@ -17,7 +16,7 @@ pub extern "C" fn _start() -> ! {
      * We need to use the symbol or it will be stripped from the executable
      */
     let _use_multiboot = &multiboot::MULTIBOOT;
-    write_string("It works!\n");
+    println!("It works!");
     loop {
     }
 }

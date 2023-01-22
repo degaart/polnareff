@@ -7,6 +7,7 @@ pub struct Multiboot {
 
 const MULTIBOOT_MAGIC: u32 = 0x1BADB002;
 
+#[used]
 #[link_section = ".multiboot"]
 pub static MULTIBOOT: Multiboot = Multiboot {
     magic: MULTIBOOT_MAGIC,
